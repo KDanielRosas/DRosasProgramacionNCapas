@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewBag.Title = "GetById";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+@model ML.Departamento 
+
+
+<div class="container">
+    <div class="row">
+        <h2>Departamento</h2>
+    </div>
+
+    <div class="row">
+        <label for="IdDepartamento">Ingrese el ID del departamento que sea consultar:</label>
+        
+        
+            <input type="text" name="IdDepto" />
+            <input type="submit" />
+        
+        @if (Model != null)
+        {
+            <table class="table table-bordered table-responsive">
+                <thead>
+                    <tr>
+                        <td class="text-center" style="font-weight:bold;">Editar</td>
+
+                        <td class="hidden">IdDepartamento</td>
+                        <td class="text-center" style="font-weight:bold;">Nombre</td>
+                        <td class="hidden">IdArea</td>
+                        <td class="text-center" style="font-weight:bold;">Area</td>
+
+                        <td class="text-center" style="font-weight:bold;">Eliminar</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="text-center"><a class="btn btn-warning glyphicon glyphicon-edit"></a></td>
+
+                        <td class="hidden">@Model.IdDepartamento</td>
+                        <td>@Model.Nombre</td>
+                        <td class="hidden">@Model.Area.IdArea</td>
+                        <td>@Model.Area.Nombre</td>
+                        <td class="text-center"><a class="btn btn-danger glyphicon glyphicon-trash"</td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+            <ul>
+            </ul>
+            <br />
+        }
+        else
+        {
+            <h1>Error! no se encontraron registros!</h1>
+            }
+    </div>
+</div><!--divContainer-->
+

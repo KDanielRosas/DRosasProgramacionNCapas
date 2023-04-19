@@ -1,0 +1,120 @@
+﻿@model ML.Usuario
+    
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container">
+    <div class="row">
+        <h2><i class="fa-solid fa-users fa-flip" style="--fa-animation-duration: 6s; color:royalblue;"></i> Usuarios</h2>
+    </div> 
+    <hr />
+    <div class="row">
+        <div style="float:right">
+            @Html.ActionLink("Agregar Usuario", "Form", "Usuario", htmlAttributes: new { @class = "btn btn-success" })
+            <hr />
+        </div>
+    </div>
+
+    <div class="row">
+        @if (Model.Usuarios != null)
+        {
+            <table class="table table-bordered table-responsive">
+                <thead>
+                    <tr>
+                        <td class="text-center" style="font-weight:bold;">Editar</td>
+                        <td class="text-center" style="font-weight:bold;">Eliminar</td>
+
+                        <td class="hidden">IdUsuario</td>
+                        <td class="text-center" style="font-weight:bold;">UserName</td>
+                        <td class="text-center" style="font-weight:bold;">Nombre</td>
+                        <td class="text-center" style="font-weight:bold;">Email</td>
+                        <td class="text-center" style="font-weight:bold;">Password</td>
+                        <td class="text-center" style="font-weight:bold;">FechaNacimiento</td>
+                        <td class="text-center" style="font-weight:bold;">Sexo</td>
+                        <td class="text-center" style="font-weight:bold;">Telefono</td>
+                        <td class="text-center" style="font-weight:bold;">Celular</td>
+                        <td class="text-center" style="font-weight:bold;">CURP</td>
+                        <td class="text-center" style="font-weight:bold;">Imagen</td>
+                        <td class="hidden">IdRol</td>
+                        <td class="text-center" style="font-weight:bold;">Rol</td>
+                        <td class="hidden">IdDireccion</td>
+                        <td class="hidden">IdPais</td>
+                        <td class="text-center" style="font-weight:bold;">Direccion</td>
+                        <td class="hidden">IdEstado</td>
+                        @*<td class="text-center" style="font-weight:bold;">Estado</td>*@
+                        <td class="hidden">IdMunicipio</td>
+                        @*<td class="text-center" style="font-weight:bold;">Municipio</td>*@
+                        <td class="hidden">IdColonia</td>
+                        @*<td class="text-center" style="font-weight:bold;">Colonia</td>*@
+
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (ML.Usuario usuario in Model.Usuarios)
+                    {
+                        <tr>
+                            <td class="text-center">
+                                <a class="btn btn-warning glyphicon glyphicon-edit"
+                                   href="@Url.Action("Form", "Usuario", new { IdUsuario = usuario.IdUsuario })"></a>
+                            </td>
+
+                            <td class="text-center">
+                                <a class="btn btn-danger glyphicon glyphicon-trash"
+                                   href="@Url.Action("Delete","Usuario",
+                                                            new { IdUsuario = usuario.IdUsuario })"></a>
+                            </td>
+
+                            <td class="hidden">@usuario.IdUsuario</td>
+                            <td>@usuario.UserName</td>
+                            <td>@usuario.Nombre @usuario.ApellidoPaterno @usuario.ApellidoMaterno</td>
+                            <td>@usuario.Email</td>
+                            <td>@usuario.Password</td>
+                            <td>@usuario.FechaNacimiento</td>
+                            <td>@usuario.Sexo</td>
+                            <td>@usuario.Telefono</td>
+                            <td>@usuario.Celular</td>
+                            <td>@usuario.CURP</td>
+                            <td>
+                                @if (usuario.Imagen != null)
+                                {
+
+                                    <img id="Img" src="data:image/*;base64,@usuario.Imagen" style="width:150px ; height:150px" />
+
+                                }
+                                else
+                                {
+                                    <img id="Img" src="~/Imagenes/SinImagen.png" style="width:150px ; height:150px" />
+                                }
+                            </td>
+                            
+                            <td class="hidden">@usuario.Rol.IdRol</td>
+                            <td>@usuario.Rol.Nombre</td>
+                            <td class="hidden">@usuario.Direccion.IdDireccion</td>
+                            <td class="hidden">@usuario.Direccion.Colonia.Municipio.Estado.Pais.IdPais</td>
+                            <td class="hidden">@usuario.Direccion.Colonia.Municipio.Estado.IdEstado</td>
+                            <td class="hidden">@usuario.Direccion.Colonia.Municipio.IdMunicipio</td>
+                            <td class="hidden">@usuario.Direccion.Colonia.IdColonia</td>
+                            <td>
+                                @usuario.Direccion.Colonia.Municipio.Estado.Pais.Nombre
+                            @usuario.Direccion.Colonia.Municipio.Estado.Nombre
+                            @usuario.Direccion.Colonia.Municipio.Nombre
+                            @usuario.Direccion.Colonia.Nombre
+                        </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+
+        else
+        {
+            <div class="alert alert-danger" role="alert">Ocurrio un error!!</div>
+        }
+    </div>
+
+</div><!--container-->
